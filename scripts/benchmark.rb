@@ -1,3 +1,4 @@
+# rubocop:disable Style/FrozenStringLiteralComment
 require 'benchmark'
 
 require 'moji'
@@ -85,3 +86,4 @@ Benchmark.bm(20) do |x|
     end
   end
 end
+# rubocop:enable Style/FrozenStringLiteralComment
