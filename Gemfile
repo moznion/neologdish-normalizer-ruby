@@ -2,7 +2,12 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in neologd-normalizer.gemspec
 gemspec
 
 gem "rake", "~> 13.0"
+
+group :development do
+  gem 'typeprof', require: false
+  gem 'rubocop', require: false
+end
+
