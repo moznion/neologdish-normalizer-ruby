@@ -1,6 +1,6 @@
 # Neologdish::Normalizer for Ruby
 
-A Japanese text normalization library for Ruby follows the conventions of [neologd/mecab-ipadic-neologd](https://github.com/neologd/mecab-ipadic-neologd), with some performance optimizations. It is designed to preprocess Japanese text before applying NLP techniques.
+A Japanese text normalization library for Ruby follows the conventions of [neologd/mecab-ipadic-neologd](https://github.com/neologd/mecab-ipadic-neologd), with some performance optimizations, without external dependencies. It is designed to preprocess Japanese text before applying NLP techniques.
 
 The specific rules are documented here: https://github.com/neologd/mecab-ipadic-neologd/wiki/Regexp.ja
 
@@ -10,7 +10,7 @@ The specific rules are documented here: https://github.com/neologd/mecab-ipadic-
 require "neologdish-normalizer"
 
 Neologdish::Normalizer.normalize("南アルプスの　天然水-　Ｓｐａｒｋｉｎｇ*　Ｌｅｍｏｎ+　レモン一絞り")
-# => 南アルプスの天然水-Sparking*Lemon+レモン一絞り 
+# => 南アルプスの天然水-Sparking*Lemon+レモン一絞り
 ```
 
 ## Benchmark
