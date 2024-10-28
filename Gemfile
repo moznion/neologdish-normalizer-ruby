@@ -7,7 +7,6 @@ gemspec
 gem "rake", "~> 13.0"
 
 group :development do
-  gem 'typeprof', require: false
-  gem 'rubocop', require: false
+  gem "standard", require: false
+  gem "typeprof", require: false
 end
-
