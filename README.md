@@ -1,4 +1,4 @@
-# Neologdish::Normalizer for Ruby
+# Neologdish::Normalizer for Ruby [![Check](https://github.com/moznion/neologdish-normalizer-ruby/actions/workflows/check.yml/badge.svg)](https://github.com/moznion/neologdish-normalizer-ruby/actions/workflows/check.yml) [![Gem Version](https://badge.fury.io/rb/neologdish-normalizer.svg)](https://badge.fury.io/rb/neologdish-normalizer)
 
 A Japanese text normalization library for Ruby follows the conventions of [neologd/mecab-ipadic-neologd](https://github.com/neologd/mecab-ipadic-neologd), with some performance optimizations, without external dependencies. It is designed to preprocess Japanese text before applying NLP techniques.
 
@@ -27,18 +27,16 @@ The benchmark script is here: [./scripts/benchmark.rb](./scripts/benchmark.rb)
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
-
 Install the gem and add to the application's Gemfile by executing:
 
 ```bash
-bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+bundle add 'neologdish-normalizer'
 ```
 
 If bundler is not being used to manage dependencies, install the gem by executing:
 
 ```bash
-gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+gem install 'neologdish-normalizer'
 ```
 
 ## Development
