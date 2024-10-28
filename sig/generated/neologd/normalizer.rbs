@@ -1,0 +1,9 @@
+# Generated from lib/neologd/normalizer.rb with RBS::Inline
+
+module Neologd
+  module Normalizer
+    # @rbs str: String
+    # @rbs return: String
+    def normalize: (String str) -> String
+  end
+end
