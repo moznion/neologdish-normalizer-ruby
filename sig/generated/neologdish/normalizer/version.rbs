@@ -1,0 +1,7 @@
+# Generated from lib/neologdish/normalizer/version.rb with RBS::Inline
+
+module Neologdish
+  module Normalizer
+    VERSION: String
+  end
+end

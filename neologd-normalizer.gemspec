@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "lib/neologd/normalizer/version"
+require_relative "lib/neologdish/normalizer/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "neologd-normalizer"
-  spec.version = Neologd::Normalizer::VERSION
+  spec.name = "neologdish-normalizer"
+  spec.version = Neologdish::Normalizer::VERSION
   spec.authors = ["moznion"]
   spec.email = ["moznion@mail.moznion.net"]
 

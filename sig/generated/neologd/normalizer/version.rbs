@@ -1,7 +1,0 @@
-# Generated from lib/neologd/normalizer/version.rb with RBS::Inline
-
-module Neologd
-  module Normalizer
-    VERSION: String
-  end
-end

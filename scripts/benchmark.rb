@@ -1,7 +1,7 @@
 require 'benchmark'
 
 require 'moji'
-require_relative '../lib/neologd/normalizer'
+require_relative '../lib/neologdish/normalizer'
 
 # original implementation came from https://github.com/neologd/mecab-ipadic-neologd/wiki/Regexp.ja
 def original_normalize_neologd(norm)
@@ -70,7 +70,7 @@ Benchmark.bm(20) do |x|
   x.report("this library:") do
     n.times do
       targets.each do |target|
-        Neologd::Normalizer.normalize(target)
+        Neologdish::Normalizer.normalize(target)
       end
     end
   end

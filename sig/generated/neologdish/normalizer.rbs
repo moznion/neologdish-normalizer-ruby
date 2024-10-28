@@ -1,6 +1,6 @@
-# Generated from lib/neologd/normalizer.rb with RBS::Inline
+# Generated from lib/neologdish/normalizer.rb with RBS::Inline
 
-module Neologd
+module Neologdish
   module Normalizer
     CONVERSION_MAP: Hash[String, String]
 

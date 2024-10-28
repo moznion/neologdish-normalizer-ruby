@@ -2,7 +2,7 @@
 
 require_relative "normalizer/version"
 
-module Neologd
+module Neologdish
   module Normalizer
     CONVERSION_MAP = {
       # Normalize [0-9a-zA-Z] to half-width
