@@ -6,6 +6,12 @@ module Neologd
 
     LATIN_MAP: Hash[String, bool]
 
+    HALF_WIDTH_KANA_MAP: Hash[String, String]
+
+    DAKUON_KANA_MAP: Hash[String, String]
+
+    HANDAKUON_KANA_MAP: Hash[String, String]
+
     # @rbs str: String
     # @rbs return: String
     def normalize: (String str) -> String

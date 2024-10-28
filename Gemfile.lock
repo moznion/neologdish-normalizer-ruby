@@ -55,8 +55,6 @@ GEM
     standard-performance (1.5.0)
       lint_roller (~> 1.1)
       rubocop-performance (~> 1.22.0)
-    typeprof (0.21.11)
-      rbs (>= 1.8.1)
     unicode-display_width (2.6.0)
 
 PLATFORMS
@@ -69,9 +67,7 @@ DEPENDENCIES
   neologd-normalizer!
   rake (~> 13.0)
   rbs-inline (~> 0.9.0)
-  rubocop
   standard (~> 1.41)
-  typeprof
 
 BUNDLED WITH
    2.5.22

@@ -12,7 +12,7 @@ module Neologd
         assert_equal "abcdefghijklmnopqrstuvwxyz", Neologd::Normalizer.normalize("ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ")
         assert_equal "!\"\#$%&'()*+,-./:;<>?@[¥]^_`{|}", Neologd::Normalizer.normalize("！”＃＄％＆’（）＊＋，−．／：；＜＞？＠［￥］＾＿｀｛｜｝")
         assert_equal "＝。、・「」", Neologd::Normalizer.normalize("＝。、・「」")
-        assert_equal "ハンカク", Neologd::Normalizer.normalize("ﾊﾝｶｸ")
+        assert_equal "ハンカクダヨ", Neologd::Normalizer.normalize("ﾊﾝｶｸﾀﾞﾖ")
         assert_equal "o-o", Neologd::Normalizer.normalize("o₋o")
         assert_equal "majikaー", Neologd::Normalizer.normalize("majika━")
         assert_equal "わい", Neologd::Normalizer.normalize("わ〰い")

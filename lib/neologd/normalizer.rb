@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative "normalizer/version"
-require "moji"
 
 module Neologd
   module Normalizer
@@ -38,18 +37,58 @@ module Neologd
       "u" => true, "v" => true, "w" => true, "x" => true, "y" => true, "z" => true
     } #: Hash[String, bool]
 
-    private_constant :CONVERSION_MAP, :LATIN_MAP
+    HALF_WIDTH_KANA_MAP = {
+      "ｱ" => "ア", "ｲ" => "イ", "ｳ" => "ウ", "ｴ" => "エ", "ｵ" => "オ",
+      "ｶ" => "カ", "ｷ" => "キ", "ｸ" => "ク", "ｹ" => "ケ", "ｺ" => "コ",
+      "ｻ" => "サ", "ｼ" => "シ", "ｽ" => "ス", "ｾ" => "セ", "ｿ" => "ソ",
+      "ﾀ" => "タ", "ﾁ" => "チ", "ﾂ" => "ツ", "ﾃ" => "テ", "ﾄ" => "ト",
+      "ﾅ" => "ナ", "ﾆ" => "ニ", "ﾇ" => "ヌ", "ﾈ" => "ネ", "ﾉ" => "ノ",
+      "ﾊ" => "ハ", "ﾋ" => "ヒ", "ﾌ" => "フ", "ﾍ" => "ヘ", "ﾎ" => "ホ",
+      "ﾏ" => "マ", "ﾐ" => "ミ", "ﾑ" => "ム", "ﾒ" => "メ", "ﾓ" => "モ",
+      "ﾔ" => "ヤ", "ﾕ" => "ユ", "ﾖ" => "ヨ",
+      "ﾗ" => "ラ", "ﾘ" => "リ", "ﾙ" => "ル", "ﾚ" => "レ", "ﾛ" => "ロ",
+      "ﾜ" => "ワ", "ｦ" => "ヲ", "ﾝ" => "ン",
+      "ｧ" => "ァ", "ｨ" => "ィ", "ｩ" => "ゥ", "ｪ" => "ェ", "ｫ" => "ォ",
+      "ｯ" => "ッ", "ｬ" => "ヤ", "ｭ" => "ユ", "ｮ" => "ヨ"
+    } #: Hash[String, String]
+
+    DAKUON_KANA_MAP = {
+      "カ" => "ガ", "キ" => "ギ", "ク" => "グ", "ケ" => "ゲ", "コ" => "ゴ",
+      "サ" => "ザ", "シ" => "ジ", "ス" => "ズ", "セ" => "ゼ", "ソ" => "ゾ",
+      "タ" => "ダ", "チ" => "ヂ", "ツ" => "ヅ", "テ" => "デ", "ト" => "ド",
+      "ハ" => "バ", "ヒ" => "ビ", "フ" => "ブ", "ヘ" => "ベ", "ホ" => "ボ"
+    } #: Hash[String, String]
+
+    HANDAKUON_KANA_MAP = {
+      "ハ" => "パ", "ヒ" => "ピ", "フ" => "プ", "ヘ" => "ペ", "ホ" => "ポ"
+    } #: Hash[String, String]
+
+    private_constant :CONVERSION_MAP, :LATIN_MAP, :HALF_WIDTH_KANA_MAP, :DAKUON_KANA_MAP, :HANDAKUON_KANA_MAP
 
     # @rbs str: String
     # @rbs return: String
     def normalize(str)
-      str = Moji.han_to_zen(str, Moji::HAN_KATA)
-
       squeezee = ""
       prev_latin = false
       whitespace_encountered = false
+      encountered_half_width_kana = nil
       str = str.chars.map do |c|
+        prefix = ""
         c = CONVERSION_MAP[c] || c
+
+        # normalize the Half-width kana to full-width
+        if encountered_half_width_kana
+          if (c == "ﾞ" && (k = DAKUON_KANA_MAP[encountered_half_width_kana])) || (c == "ﾟ" && (k = HANDAKUON_KANA_MAP[encountered_half_width_kana]))
+            c = ""
+            prefix = k
+          else
+            prefix = encountered_half_width_kana
+          end
+        end
+
+        if (encountered_half_width_kana = HALF_WIDTH_KANA_MAP[c])
+          c = ""
+        end
 
         # squash consecutive special characters (space or long-vowel)
         if c == " " || c == "ー"
@@ -69,14 +108,14 @@ module Neologd
           c = ""
         else
           if is_latin && whitespace_encountered
-            c = " #{c}"
+            prefix = " "
           end
           whitespace_encountered = false
         end
         prev_latin = is_latin
 
-        c
-      end.join
+        prefix + c
+      end.join + (encountered_half_width_kana || "")
 
       str.strip
     end
