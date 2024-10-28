@@ -1,8 +1,29 @@
-# Neologd::Normalizer
+# Neologdish::Normalizer
 
-TODO: Delete this and the text below, and describe your gem
+This Japanese text normalization library follows the conventions of [neologd/mecab-ipadic-neologd](https://github.com/neologd/mecab-ipadic-neologd), with some performance optimizations. It is designed to preprocess Japanese text before applying NLP techniques.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/neologd/normalizer`. To experiment with that code, run `bin/console` for an interactive prompt.
+The specific rules are documented here: https://github.com/neologd/mecab-ipadic-neologd/wiki/Regexp.ja
+
+## Usage
+
+```ruby
+require "neologdish-normalizer"
+
+Neologdish::Normalizer.normalize("南アルプスの　天然水-　Ｓｐａｒｋｉｎｇ*　Ｌｅｍｏｎ+　レモン一絞り")
+# => 南アルプスの天然水-Sparking*Lemon+レモン一絞り 
+```
+
+## Benchmark
+
+The performance comparison between the official Ruby example (https://github.com/neologd/mecab-ipadic-neologd/wiki/Regexp.ja#ruby-written-by-kimoto-and-overlast) and this library is as follows:
+
+```
+                           user     system      total        real
+original normalizer:   4.200670   0.032004   4.232674 (  4.274573)
+this library:          1.158801   0.005238   1.164039 (  1.170226)
+```
+
+The benchmark script is here: [./scripts/benchmark.rb](./scripts/benchmark.rb)
 
 ## Installation
 
@@ -20,10 +41,6 @@ If bundler is not being used to manage dependencies, install the gem by executin
 gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
 ```
 
-## Usage
-
-TODO: Write usage instructions here
-
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
@@ -32,4 +49,4 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/neologd-normalizer.
+Bug reports and pull requests are welcome on GitHub at https://github.com/moznion/neologdish-normalizer.
