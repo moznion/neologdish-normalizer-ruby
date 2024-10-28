@@ -1,0 +1,18 @@
+require:
+  - rubocop-rake
+  - rubocop-minitest
+
+AllCops:
+  NewCops: enable
+
+Metrics:
+  Enabled: false
+Layout/LineLength:
+  Max: 140
+Metrics/MethodLength:
+  Max: 14
+Layout/LeadingCommentSpace:
+  AllowRBSInlineAnnotation: true
+Minitest/MultipleAssertions:
+  Enabled: false
+
