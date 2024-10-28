@@ -2,6 +2,10 @@
 
 module Neologd
   module Normalizer
+    CONVERSION_MAP: Hash[String, String]
+
+    LATIN_MAP: Hash[String, bool]
+
     # @rbs str: String
     # @rbs return: String
     def normalize: (String str) -> String
