@@ -56,7 +56,7 @@ DEPENDENCIES
   neologdish-normalizer!
   rake (~> 13.0)
   rbs-inline (~> 0.9.0)
-  rubocop (~> 1.66)
+  rubocop (~> 1.67)
   rubocop-minitest (~> 0.36.0)
   rubocop-rake (~> 0.6.0)
 
