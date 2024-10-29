@@ -69,15 +69,18 @@ module Neologdish
     # Normalize the given text.
     #
     # @rbs str: String
+    # @rbs override_conversion_map: Hash[String, String]
     # @rbs return: String
-    def normalize(str)
+    def normalize(str, override_conversion_map = {})
+      conversion_map = CONVERSION_MAP.merge(override_conversion_map)
+
       squeezee = ''
       prev_latin = false
       whitespace_encountered = false
       encountered_half_width_kana = nil
       normalized = str.chars.map do |c|
         prefix = ''
-        c = CONVERSION_MAP[c] || c
+        c = conversion_map[c] || c
 
         # normalize the Half-width kana to full-width
         if encountered_half_width_kana

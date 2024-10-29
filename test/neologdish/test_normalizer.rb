@@ -32,6 +32,13 @@ module Neologdish
         assert_equal '南アルプスの天然水-Sparking*Lemon+レモン一絞り',
                      Neologdish::Normalizer.normalize('南アルプスの　天然水-　Ｓｐａｒｋｉｎｇ*　Ｌｅｍｏｎ+　レモン一絞り')
       end
+
+      def test_override_conversion_map
+        assert_equal '零12345678九亜', Neologdish::Normalizer.normalize(
+          '０１２３４５６７８９あ',
+          { '０' => '零', '９' => '九', 'あ' => '亜' }
+        )
+      end
     end
   end
 end
