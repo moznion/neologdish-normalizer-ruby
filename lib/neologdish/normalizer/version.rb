@@ -2,6 +2,6 @@
 
 module Neologdish
   module Normalizer
-    VERSION = '0.0.1' #: String
+    VERSION = '0.1.0' #: String
   end
 end
