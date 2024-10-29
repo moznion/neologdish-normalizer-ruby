@@ -112,7 +112,7 @@ module Neologdish
           c = ''
         else
           prefix = ' ' if is_latin && whitespace_encountered
-          whitespace_encountered = false
+          whitespace_encountered &&= c == '' # take care for consecutive spaces on the right side
         end
         prev_latin = is_latin
 
