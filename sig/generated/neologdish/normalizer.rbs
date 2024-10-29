@@ -1,6 +1,7 @@
 # Generated from lib/neologdish/normalizer.rb with RBS::Inline
 
 module Neologdish
+  # A Japanese text normalizer module according to the neologd convention.
   module Normalizer
     CONVERSION_MAP: Hash[String, String]
 
@@ -12,8 +13,11 @@ module Neologdish
 
     HANDAKUON_KANA_MAP: Hash[String, String]
 
+    # Normalize the given text.
+    #
     # @rbs str: String
+    # @rbs override_conversion_map: Hash[String, String]
     # @rbs return: String
-    def normalize: (String str) -> String
+    def normalize: (String str, ?Hash[String, String] override_conversion_map) -> String
   end
 end
