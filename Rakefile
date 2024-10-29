@@ -12,6 +12,11 @@ namespace :rbs do
   end
 end
 
+desc 'run benchmark script'
+task :benchmark do
+  sh 'ruby ./scripts/benchmark.rb'
+end
+
 Rake::TestTask.new do |task|
   task.libs = %w[lib test]
   task.test_files = FileList['test/**/*.rb']
