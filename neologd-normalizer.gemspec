@@ -10,12 +10,12 @@ Gem::Specification.new do |spec|
 
   spec.summary = 'A Japanese text normalization library follows the conventions of neologd'
   spec.description = 'A Japanese text normalization library follows the conventions of neologd with some performance optimizations. It is designed to preprocess Japanese text before applying NLP techniques.' # rubocop:disable Layout/LineLength
-  spec.homepage = 'https://github.com/moznion/neologdish-normalizer'
+  spec.homepage = 'https://github.com/moznion/neologdish-normalizer-ruby'
   spec.required_ruby_version = '>= 3.0.0'
 
   spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = 'https://github.com/moznion/neologdish-normalizer'
-  spec.metadata['changelog_uri'] = 'https://github.com/moznion/neologdish-normalizer/releases'
+  spec.metadata['source_code_uri'] = 'https://github.com/moznion/neologdish-normalizer-ruby'
+  spec.metadata['changelog_uri'] = 'https://github.com/moznion/neologdish-normalizer-ruby/releases'
 
   gemspec = File.basename(__FILE__)
   spec.files = IO.popen(%w[git ls-files -z], chdir: __dir__, err: IO::NULL) do |ls|
