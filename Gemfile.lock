@@ -23,7 +23,7 @@ GEM
     rake (13.2.1)
     rbs (3.9.2)
       logger
-    rbs-inline (0.10.0)
+    rbs-inline (0.11.0)
       prism (>= 0.29, < 1.3)
       rbs (>= 3.5.0)
     regexp_parser (2.10.0)
@@ -57,7 +57,7 @@ DEPENDENCIES
   moji (~> 1.6)
   neologdish-normalizer!
   rake (~> 13.0)
-  rbs-inline (~> 0.10.0)
+  rbs-inline (~> 0.11.0)
   rubocop (~> 1.67)
   rubocop-minitest (~> 0.36.0)
   rubocop-rake (~> 0.6.0)
