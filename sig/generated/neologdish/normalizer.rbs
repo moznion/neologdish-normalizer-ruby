@@ -3,6 +3,10 @@
 module Neologdish
   # A Japanese text normalizer module according to the neologd convention.
   module Normalizer
+    NORMALIZED_HYPHEN: ::String
+
+    NORMALIZED_VOWEL: ::String
+
     CONVERSION_MAP: Hash[String, String]
 
     LATIN_MAP: Hash[String, bool]
