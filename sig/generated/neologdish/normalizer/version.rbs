@@ -2,6 +2,6 @@
 
 module Neologdish
   module Normalizer
-    VERSION: String
+    VERSION: ::String
   end
 end
