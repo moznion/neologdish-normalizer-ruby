@@ -53,15 +53,35 @@ module Neologdish
       'ｯ' => 'ッ', 'ｬ' => 'ヤ', 'ｭ' => 'ユ', 'ｮ' => 'ヨ'
     }.freeze #: Hash[String, String]
 
+    DAKUON_HANDAKUON_POSSIBLES = {
+      'ウ' => true,
+      'カ' => true, 'キ' => true, 'ク' => true, 'ケ' => true, 'コ' => true,
+      'サ' => true, 'シ' => true, 'ス' => true, 'セ' => true, 'ソ' => true,
+      'タ' => true, 'チ' => true, 'ツ' => true, 'テ' => true, 'ト' => true,
+      'ハ' => true, 'ヒ' => true, 'フ' => true, 'ヘ' => true, 'ホ' => true,
+      'う' => true,
+      'か' => true, 'き' => true, 'く' => true, 'け' => true, 'こ' => true,
+      'さ' => true, 'し' => true, 'す' => true, 'せ' => true, 'そ' => true,
+      'た' => true, 'ち' => true, 'つ' => true, 'て' => true, 'と' => true,
+      'は' => true, 'ひ' => true, 'ふ' => true, 'へ' => true, 'ほ' => true
+    }.freeze #: Hash[String, bool]
+
     DAKUON_KANA_MAP = {
+      'ウ' => 'ヴ',
       'カ' => 'ガ', 'キ' => 'ギ', 'ク' => 'グ', 'ケ' => 'ゲ', 'コ' => 'ゴ',
       'サ' => 'ザ', 'シ' => 'ジ', 'ス' => 'ズ', 'セ' => 'ゼ', 'ソ' => 'ゾ',
       'タ' => 'ダ', 'チ' => 'ヂ', 'ツ' => 'ヅ', 'テ' => 'デ', 'ト' => 'ド',
-      'ハ' => 'バ', 'ヒ' => 'ビ', 'フ' => 'ブ', 'ヘ' => 'ベ', 'ホ' => 'ボ'
+      'ハ' => 'バ', 'ヒ' => 'ビ', 'フ' => 'ブ', 'ヘ' => 'ベ', 'ホ' => 'ボ',
+      'う' => 'ゔ',
+      'か' => 'が', 'き' => 'ぎ', 'く' => 'ぐ', 'け' => 'げ', 'こ' => 'ご',
+      'さ' => 'ざ', 'し' => 'じ', 'す' => 'ず', 'せ' => 'ぜ', 'そ' => 'ぞ',
+      'た' => 'だ', 'ち' => 'ぢ', 'つ' => 'づ', 'て' => 'で', 'と' => 'ど',
+      'は' => 'ば', 'ひ' => 'び', 'ふ' => 'ぶ', 'へ' => 'べ', 'ほ' => 'ぼ'
     }.freeze #: Hash[String, String]
 
     HANDAKUON_KANA_MAP = {
-      'ハ' => 'パ', 'ヒ' => 'ピ', 'フ' => 'プ', 'ヘ' => 'ペ', 'ホ' => 'ポ'
+      'ハ' => 'パ', 'ヒ' => 'ピ', 'フ' => 'プ', 'ヘ' => 'ペ', 'ホ' => 'ポ',
+      'は' => 'ぱ', 'ひ' => 'ぴ', 'ふ' => 'ぷ', 'へ' => 'ぺ', 'ほ' => 'ぽ'
     }.freeze #: Hash[String, String]
 
     private_constant :CONVERSION_MAP, :LATIN_MAP, :HALF_WIDTH_KANA_MAP, :DAKUON_KANA_MAP, :HANDAKUON_KANA_MAP
@@ -77,23 +97,29 @@ module Neologdish
       squeezee = ''
       prev_latin = false
       whitespace_encountered = false
-      encountered_half_width_kana = nil
+      dakuon_handakuon_possible = nil
       normalized = str.chars.map do |c|
         prefix = ''
         c = conversion_map[c] || c
 
         # normalize the Half-width kana to full-width
-        if encountered_half_width_kana
-          if (c == 'ﾞ' && (k = DAKUON_KANA_MAP[encountered_half_width_kana])) ||
-             (c == 'ﾟ' && (k = HANDAKUON_KANA_MAP[encountered_half_width_kana]))
+        if dakuon_handakuon_possible
+          if (["\u309b", "\u3099", "\uff9e"].include?(c) && (k = DAKUON_KANA_MAP[dakuon_handakuon_possible])) ||
+             (["\u309c", "\u309a", "\uff9f"].include?(c) && (k = HANDAKUON_KANA_MAP[dakuon_handakuon_possible]))
             c = ''
             prefix = k
           else
-            prefix = encountered_half_width_kana
+            prefix = dakuon_handakuon_possible
           end
         end
 
         if (encountered_half_width_kana = HALF_WIDTH_KANA_MAP[c])
+          c = encountered_half_width_kana
+        end
+
+        dakuon_handakuon_possible = nil
+        if DAKUON_HANDAKUON_POSSIBLES[c]
+          dakuon_handakuon_possible = c
           c = ''
         end
 
@@ -120,7 +146,7 @@ module Neologdish
         prev_latin = is_latin
 
         prefix + c
-      end.join + (encountered_half_width_kana || '')
+      end.join + (dakuon_handakuon_possible || '')
 
       normalized.strip
     end

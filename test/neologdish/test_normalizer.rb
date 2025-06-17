@@ -37,6 +37,10 @@ module Neologdish
         assert_equal '南アルプスの天然水-Sparking*Lemon+レモン一絞り',
                      Neologdish::Normalizer.normalize('南アルプスの　天然水-　Ｓｐａｒｋｉｎｇ*　Ｌｅｍｏｎ+　レモン一絞り')
         assert_equal 'ツギノ「ヌﾟ」ハオカシナモジデス', Neologdish::Normalizer.normalize('ﾂｷﾞﾉ「ﾇﾟ」ﾊｵｶｼﾅﾓｼﾞﾃﾞｽ')
+        assert_equal 'ばばばぱぱぱ',
+                     Neologdish::Normalizer.normalize("は\u309bは\u3099は\uff9eは\u309cは\u309aは\uff9f")
+        assert_equal 'バババパパパ',
+                     Neologdish::Normalizer.normalize("ハ\u309bハ\u3099ハ\uff9eハ\u309cハ\u309aハ\uff9f")
       end
 
       def test_override_conversion_map
