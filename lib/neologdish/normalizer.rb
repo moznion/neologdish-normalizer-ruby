@@ -5,6 +5,9 @@ require_relative 'normalizer/version'
 module Neologdish
   # A Japanese text normalizer module according to the neologd convention.
   module Normalizer
+    NORMALIZED_HYPHEN = "\u002d" # -
+    NORMALIZED_VOWEL = "\u30fc" # ー
+
     CONVERSION_MAP = {
       # Normalize [0-9a-zA-Z] to half-width
       '０' => '0', '１' => '1', '２' => '2', '３' => '3', '４' => '4', '５' => '5', '６' => '6', '７' => '7', '８' => '8', '９' => '9',
@@ -15,11 +18,31 @@ module Neologdish
       'ｋ' => 'k', 'ｌ' => 'l', 'ｍ' => 'm', 'ｎ' => 'n', 'ｏ' => 'o', 'ｐ' => 'p', 'ｑ' => 'q', 'ｒ' => 'r', 'ｓ' => 's', 'ｔ' => 't',
       'ｕ' => 'u', 'ｖ' => 'v', 'ｗ' => 'w', 'ｘ' => 'x', 'ｙ' => 'y', 'ｚ' => 'z',
       # normalize the hyphen/minus-ish characters to '-'
-      '˗' => '-', '֊' => '-', '‐' => '-', '‑' => '-', '‒' => '-', '–' => '-', '⁃' => '-', '⁻' => '-', '₋' => '-', '−' => '-',
+      "\u02d7" => NORMALIZED_HYPHEN, # ˗
+      "\u058a" => NORMALIZED_HYPHEN, # ֊
+      "\u2010" => NORMALIZED_HYPHEN, # ‐
+      "\u2011" => NORMALIZED_HYPHEN, # ‑
+      "\u2012" => NORMALIZED_HYPHEN, # ‒
+      "\u2013" => NORMALIZED_HYPHEN, # –
+      "\u2043" => NORMALIZED_HYPHEN, # ⁃
+      "\u207b" => NORMALIZED_HYPHEN, # ⁻
+      "\u208b" => NORMALIZED_HYPHEN, # ₋
+      "\u2212" => NORMALIZED_HYPHEN, # −
       # normalize the long-vowel mark-ish characters to 'ー'
-      '﹣' => 'ー', '－' => 'ー', 'ｰ' => 'ー', '—' => 'ー', '―' => 'ー', '─' => 'ー', '━' => 'ー',
+      "\u2014" => NORMALIZED_VOWEL, # —
+      "\u2015" => NORMALIZED_VOWEL, # ―
+      "\u2500" => NORMALIZED_VOWEL, # ─
+      "\u2501" => NORMALIZED_VOWEL, # ━
+      "\ufe63" => NORMALIZED_VOWEL, # ﹣
+      "\uff0d" => NORMALIZED_VOWEL, # －
+      "\uff70" => NORMALIZED_VOWEL, # ｰ
       # remove the tilde-ish characters
-      '~' => '', '∼' => '', '∾' => '', '〜' => '', '〰' => '', '～' => '',
+      "\u007e" => '', # ~
+      "\u223c" => '', # ∼
+      "\u223e" => '', # ∾
+      "\u301c" => '', # 〜
+      "\u3030" => '', # 〰
+      "\uff5e" => '', # ～
       # normalize the full-width special symbol characters (/！”＃＄％＆’（）＊＋，−．／：；＜＞？＠［￥］＾＿｀｛｜｝) and space characters to half-width
       '　' => ' ', '！' => '!', '”' => '"', '＃' => '#', '＄' => '$', '％' => '%', '＆' => '&', '’' => "'", '（' => '(', '）' => ')',
       '＊' => '*', '＋' => '+', '，' => ',', '．' => '.', '／' => '/', '：' => ':', '；' => ';', '＜' => '<', '＞' => '>', '？' => '?',
@@ -84,7 +107,8 @@ module Neologdish
       'は' => 'ぱ', 'ひ' => 'ぴ', 'ふ' => 'ぷ', 'へ' => 'ぺ', 'ほ' => 'ぽ'
     }.freeze #: Hash[String, String]
 
-    private_constant :CONVERSION_MAP, :LATIN_MAP, :HALF_WIDTH_KANA_MAP, :DAKUON_KANA_MAP, :HANDAKUON_KANA_MAP
+    private_constant :CONVERSION_MAP, :LATIN_MAP, :HALF_WIDTH_KANA_MAP, :DAKUON_KANA_MAP, :HANDAKUON_KANA_MAP, :DAKUON_HANDAKUON_POSSIBLES,
+                     :NORMALIZED_HYPHEN, :NORMALIZED_VOWEL
 
     # Normalize the given text.
     #
