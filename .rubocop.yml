@@ -1,10 +1,9 @@
 require:
-  - rubocop-rake
   - rubocop-minitest
-
+plugins:
+  - rubocop-rake
 AllCops:
   NewCops: enable
-
 Metrics:
   Enabled: false
 Layout/LineLength:
