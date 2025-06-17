@@ -9,6 +9,8 @@ module Neologdish
 
     HALF_WIDTH_KANA_MAP: Hash[String, String]
 
+    DAKUON_HANDAKUON_POSSIBLES: Hash[String, bool]
+
     DAKUON_KANA_MAP: Hash[String, String]
 
     HANDAKUON_KANA_MAP: Hash[String, String]
@@ -18,6 +20,6 @@ module Neologdish
     # @rbs str: String
     # @rbs override_conversion_map: Hash[String, String]
     # @rbs return: String
-    def normalize: (String str, ?Hash[String, String] override_conversion_map) -> String
+    def self?.normalize: (String str, ?Hash[String, String] override_conversion_map) -> String
   end
 end
