@@ -11,7 +11,8 @@ GEM
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
     logger (1.7.0)
-    minitest (5.27.0)
+    minitest (6.0.1)
+      prism (~> 1.5)
     moji (1.6)
     parallel (1.27.0)
     parser (3.3.8.0)
@@ -54,7 +55,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  minitest (~> 5.25)
+  minitest (~> 6.0)
   moji (~> 1.6)
   neologdish-normalizer!
   rake (~> 13.0)
