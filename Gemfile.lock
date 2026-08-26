@@ -17,15 +17,17 @@ GEM
     parser (3.3.8.0)
       ast (~> 2.4.1)
       racc
-    prism (1.6.0)
+    prism (1.9.0)
     racc (1.8.1)
     rainbow (3.1.1)
     rake (13.3.1)
-    rbs (3.9.5)
+    rbs (4.2.0)
       logger
-    rbs-inline (0.12.0)
+      prism (>= 1.6.0)
+      tsort
+    rbs-inline (0.14.0)
       prism (>= 0.29)
-      rbs (>= 3.8.0)
+      rbs (~> 4.0)
     regexp_parser (2.10.0)
     rubocop (1.74.0)
       json (~> 2.3)
@@ -47,6 +49,7 @@ GEM
       lint_roller (~> 1.1)
       rubocop (>= 1.72.1)
     ruby-progressbar (1.13.0)
+    tsort (0.2.0)
     unicode-display_width (2.6.0)
 
 PLATFORMS
@@ -58,7 +61,7 @@ DEPENDENCIES
   moji (~> 1.6)
   neologdish-normalizer!
   rake (~> 13.0)
-  rbs-inline (~> 0.12.0)
+  rbs-inline (~> 0.14.0)
   rubocop (~> 1.67)
   rubocop-minitest (~> 0.36.0)
   rubocop-rake (~> 0.7.0)
